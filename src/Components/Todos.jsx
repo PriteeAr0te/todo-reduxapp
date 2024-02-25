@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { removeTodo } from "../features/Todo/todoSlice";
+import { removeTodo, completeTodo } from "../features/Todo/todoSlice";
 
 const Todos = () => {
   const dispatch = useDispatch();
@@ -13,6 +13,10 @@ const Todos = () => {
     dispatch(removeTodo(id));
   };
 
+  const addCompltedHandler = (id) => {
+    dispatch(completeTodo(id));
+  };
+
   return (
     <>
       {todos.map((todo) => (
@@ -20,17 +24,43 @@ const Todos = () => {
           className="items-center w-[78%] bg-slate-900 p-3 mt-0.5"
           key={todo.id}
         >
-          <div className="flex justify-between">
+          <div className="flex justify-between flex-wrap">
             <div className="">
-              <h2 className="text-2xl text-indigo-500">{todo.title}</h2>
-              <p className="text-slate-200">{todo.description}</p>
+              <h2
+                className={`${
+                  todo.completed ? "line-through" : ""
+                } text-2xl text-indigo-500`}
+              >
+                {todo.title}
+              </h2>
+              <p
+                className={`${
+                  todo.complted ? "text-slate-600" : "text-slate-200"
+                }`}
+              >
+                {todo.description}
+              </p>
+              <p
+                className={`${
+                  todo.complted ? "text-slate-600" : "text-slate-300"
+                } text-sm `}
+              >
+                Due Date: {todo.date}{" "}
+              </p>
             </div>
-            <div className="p-2 flex">
-              <button className="bg-slate-200 text-sky-500 hover:text-slate-200 hover:bg-sky-500 border-1 border-sky-500 rounded-xl px-1.5 py-0.5 mx-2">
+            <div className="p-2 flex justify-center m-1 md:m-none flex-wrap">
+              <button
+                className={`${
+                  todo.completed
+                    ? "bg-sky-500 text-slate-200"
+                    : "bg-slate-200 text-sky-500"
+                }h-[40px] flex justify-center items-center hover:text-slate-200 hover:bg-sky-500 border-1 border-sky-500 rounded-xl px-1.5 py-0.5 mx-1 md:mx-2 my-1`}
+                onClick={() => addCompltedHandler(todo.id)}
+              >
                 Complete
               </button>
               <button
-                className="bg-slate-200 text-red-500 hover:text-slate-200 hover:bg-red-500 border-1 border-red-500 rounded-xl px-1.5 py-0.5 mx-2"
+                className="h-[40px] flex justify-center items-center bg-slate-200 text-red-500 hover:text-slate-200 hover:bg-red-500 border-1 border-red-500 rounded-xl px-1.5 py-0.5 mx-1 md:mx-2 my-1"
                 onClick={() => addDeleteHandler(todo.id)}
               >
                 Delete
