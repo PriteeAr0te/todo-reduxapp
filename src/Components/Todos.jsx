@@ -28,21 +28,23 @@ const Todos = () => {
             <div className="">
               <h2
                 className={`${
-                  todo.completed ? "line-through" : ""
-                } text-2xl text-indigo-500`}
+                  todo.completed
+                    ? "line-through text-indigo-600"
+                    : "text-indigo-500"
+                } text-2xl`}
               >
                 {todo.title}
               </h2>
               <p
                 className={`${
-                  todo.complted ? "text-slate-600" : "text-slate-200"
+                  todo.completed ? "text-slate-500" : "text-slate-200"
                 }`}
               >
                 {todo.description}
               </p>
               <p
                 className={`${
-                  todo.complted ? "text-slate-600" : "text-slate-300"
+                  todo.completed ? "text-slate-500" : "text-slate-300"
                 } text-sm `}
               >
                 Due Date: {todo.date}{" "}
@@ -51,13 +53,11 @@ const Todos = () => {
             <div className="p-2 flex justify-center m-1 md:m-none flex-wrap">
               <button
                 className={`${
-                  todo.completed
-                    ? "bg-sky-500 text-slate-200"
-                    : "bg-slate-200 text-sky-500"
-                }h-[40px] flex justify-center items-center hover:text-slate-200 hover:bg-sky-500 border-1 border-sky-500 rounded-xl px-1.5 py-0.5 mx-1 md:mx-2 my-1`}
+                  todo.completed ? "bg-sky-500 text-slate-200" : ""
+                } bg-slate-200 text-sky-500 h-[40px] flex justify-center items-center hover:text-slate-200 hover:bg-sky-500 border-1 border-sky-500 rounded-xl px-1.5 py-0.5 mx-1 md:mx-2 my-1`}
                 onClick={() => addCompltedHandler(todo.id)}
               >
-                Complete
+                {todo.completed ? "Completed" : "Complete"}
               </button>
               <button
                 className="h-[40px] flex justify-center items-center bg-slate-200 text-red-500 hover:text-slate-200 hover:bg-red-500 border-1 border-red-500 rounded-xl px-1.5 py-0.5 mx-1 md:mx-2 my-1"
